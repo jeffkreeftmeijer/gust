@@ -1,16 +1,15 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "gust/version"
 
 Gem::Specification.new do |s|
   s.name        = "gust"
-  s.version     = Gust::VERSION
+  s.version     = '0.0.0'
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Jeff Kreeftmeijer"]
+  s.email       = ["jeff@kreeftmeijer.nl"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Syntax highlighting and Markdown/Textile parsing}
+  s.description = %q{Syntax highlighting and Markdown/Textile parsing}
 
   s.rubyforge_project = "gust"
 
