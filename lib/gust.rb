@@ -1,0 +1,3 @@
+module Gust
+  # Your code goes here...
+end
