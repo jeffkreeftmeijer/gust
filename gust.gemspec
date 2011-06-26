@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jeff Kreeftmeijer"]
   s.email       = ["jeff@kreeftmeijer.nl"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/jeffkreeftmeijer/gust"
   s.summary     = %q{Syntax highlighting and Markdown/Textile parsing}
   s.description = %q{Syntax highlighting and Markdown/Textile parsing}
 
