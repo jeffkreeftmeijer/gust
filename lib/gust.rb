@@ -5,16 +5,15 @@ require 'RedCloth'
 class Gust
 
   def self.parse(code, options = {})
+    return "<div class=\"markup\">#{code}</div>\n" unless options[:filename]
 
-    if options[:filename]
-      code = case options[:filename]
-        when /.*\.markdown$/, /.*\.md$/ then Kramdown::Document.new(code).to_html
-        when /.*\.textile$/ then RedCloth.new(code).to_html
-        else return Pygments.highlight(code, options) rescue code
-      end
+    case options[:filename]
+      when /.*\.png$/ then "<div class=\"image\"><img src=\"#{options[:url]}\"/></div>\n"
+      when /.*\.markdown$/, /.*\.md$/ then "<div class=\"markup\">#{Kramdown::Document.new(code).to_html}</div>\n"
+      when /.*\.textile$/ then "<div class=\"markup\">#{RedCloth.new(code).to_html}</div>\n"
+      else Pygments.highlight(code, options) rescue "<div class=\"markup\">#{code}</div>\n"
     end
 
-    "<div class=\"markup\">#{code}</div>\n"
   end
 
 end
