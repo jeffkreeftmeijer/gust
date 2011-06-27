@@ -8,7 +8,7 @@ class Gust
 
     if options[:filename]
       code = case options[:filename]
-        when /.*\.markdown$/ then Kramdown::Document.new(code).to_html
+        when /.*\.markdown$/, /.*\.md$/ then Kramdown::Document.new(code).to_html
         when /.*\.textile$/ then RedCloth.new(code).to_html
         else return Pygments.highlight(code, options) rescue code
       end

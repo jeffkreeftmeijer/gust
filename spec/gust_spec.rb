@@ -3,6 +3,12 @@ require 'gust'
 
 describe Gust do
   
+  shared_examples_for 'a markdown file' do
+    
+    it { should == "<div class=\"markup\"><p><em>foo</em></p>\n</div>\n" }
+    
+  end
+  
   describe '.parse' do
     
     context 'when only passing "foo" as a string' do
@@ -33,7 +39,15 @@ describe Gust do
       
       subject { Gust.parse('*foo*', :filename => 'foo.markdown') }
       
-      it { should == "<div class=\"markup\"><p><em>foo</em></p>\n</div>\n" }
+      it_should_behave_like 'a markdown file'
+      
+    end
+    
+    context 'with a markdown file that uses the (wrong) .md extension' do
+      
+      subject { Gust.parse('*foo*', :filename => 'foo.md') }
+      
+      it_should_behave_like 'a markdown file'
       
     end
     
