@@ -5,7 +5,7 @@ require 'RedCloth'
 class Gust
 
   def self.parse(code, options = {})
-    return "<div class=\"markup\">#{code}</div>\n" unless options[:filename]
+    return "<div class=\"highlight\"><pre>#{code}</pre></div>\n" unless options[:filename]
 
     case options[:filename]
       when /.*\.png$/ then "<div class=\"image\"><img src=\"#{options[:url]}\"/></div>\n"

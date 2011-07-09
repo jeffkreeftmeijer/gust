@@ -15,7 +15,7 @@ describe Gust do
 
       subject { Gust.parse('foo') }
 
-      it { should == "<div class=\"markup\">foo</div>\n" }
+      it { should == "<div class=\"highlight\"><pre>foo</pre></div>\n" }
 
     end
 
