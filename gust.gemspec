@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "gust"
-  s.version     = '0.1.2'
+  s.version     = '0.2.1'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Jeff Kreeftmeijer"]
   s.email       = ["jeff@kreeftmeijer.nl"]
@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'pygments.rb', ['~> 0.1']
   s.add_dependency 'redcarpet', ['~> 1.17']
   s.add_dependency 'RedCloth', ['~> 4.2']
-  s.add_dependency 'nokogiri', ['~> 1.5']
+  s.add_dependency 'nokogiri', ['~> 1.0']
 end
