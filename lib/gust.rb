@@ -11,7 +11,7 @@ class Gust
       when /.*\.png$/ then "<div class=\"image\"><img src=\"#{options[:url]}\"/></div>\n"
       when /.*\.markdown$/, /.*\.md$/ then "<div class=\"markup\">#{Kramdown::Document.new(code).to_html}</div>\n"
       when /.*\.textile$/ then "<div class=\"markup\">#{RedCloth.new(code).to_html}</div>\n"
-      else Pygments.highlight(code, options) rescue "<div class=\"markup\">#{code}</div>\n"
+      else Pygments.highlight(code, options) rescue "<div class=\"highlight\"><pre>#{code}</pre></div>\n"
     end
 
   end
