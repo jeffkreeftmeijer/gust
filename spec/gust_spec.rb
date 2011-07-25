@@ -41,13 +41,13 @@ describe Gust do
 
       it_should_behave_like 'a markdown file'
 
-    end
+      context 'when using the (wrong) .md extension' do
 
-    context 'with a markdown file that uses the (wrong) .md extension' do
+        subject { Gust.parse('*foo*', :filename => 'foo.md') }
 
-      subject { Gust.parse('*foo*', :filename => 'foo.md') }
+        it_should_behave_like 'a markdown file'
 
-      it_should_behave_like 'a markdown file'
+      end
 
     end
 
