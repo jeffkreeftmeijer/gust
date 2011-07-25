@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'pygments.rb', ['~> 0.1']
   s.add_dependency 'redcarpet', ['~> 1.17']
   s.add_dependency 'RedCloth', ['~> 4.2']
+  s.add_dependency 'nokogiri', ['~> 1.5']
 end

@@ -1,6 +1,7 @@
 require 'pygments'
 require 'redcarpet'
 require 'RedCloth'
+require 'nokogiri'
 
 class Gust
   extend Pygments
@@ -26,7 +27,11 @@ class Gust
       end
 
       def markdown(markup)
-        "<div class=\"markup\">#{Redcarpet.new(markup).to_html}</div>\n"
+        inline_highlight(
+          "<div class=\"markup\">" <<
+          Redcarpet.new(markup, :fenced_code, :gh_blockcode).to_html <<
+          "</div>"
+        ) << "\n"
       end
 
       def textile(markup)
@@ -35,6 +40,14 @@ class Gust
 
       def plain_text(text)
         "<div class=\"highlight\"><pre>#{text}</pre></div>\n"
+      end
+
+      def inline_highlight(html)
+        doc = Nokogiri::HTML(html)
+        doc.search("//pre[@lang]").each do |pre|
+          pre.replace highlight(pre.text.rstrip, :lexer => pre[:lang])
+        end
+        doc.xpath('//div[@class="markup"]').to_xml
       end
 
   end

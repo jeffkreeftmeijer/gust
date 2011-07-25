@@ -41,6 +41,14 @@ describe Gust do
 
       it_should_behave_like 'a markdown file'
 
+      context 'with a Github inline code block' do
+
+        subject { Gust.parse("``` ruby\nfoo\n```", :filename => 'foo.md') }
+
+        it { should == "<div class=\"markup\"><div class=\"highlight\"><pre><span class=\"n\">foo</span>\n</pre>\n</div>\n\n</div>\n" }
+
+      end
+
       context 'when using the (wrong) .md extension' do
 
         subject { Gust.parse('*foo*', :filename => 'foo.md') }
