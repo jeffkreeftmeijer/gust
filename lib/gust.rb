@@ -39,7 +39,7 @@ class Gust
       end
 
       def plain_text(text)
-        "<div class=\"highlight\"><pre>#{text}</pre></div>\n"
+        "<div class=\"highlight plain\"><pre>#{text}</pre></div>\n"
       end
 
       def inline_highlight(html)
