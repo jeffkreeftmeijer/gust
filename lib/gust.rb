@@ -1,5 +1,5 @@
 require 'pygments'
-require 'kramdown'
+require 'redcarpet'
 require 'RedCloth'
 
 class Gust
@@ -9,7 +9,7 @@ class Gust
 
     case options[:filename]
       when /.*\.png$/ then "<div class=\"image\"><img src=\"#{options[:url]}\"/></div>\n"
-      when /.*\.markdown$/, /.*\.md$/ then "<div class=\"markup\">#{Kramdown::Document.new(code).to_html}</div>\n"
+      when /.*\.markdown$/, /.*\.md$/ then "<div class=\"markup\">#{Redcarpet.new(code).to_html}</div>\n"
       when /.*\.textile$/ then "<div class=\"markup\">#{RedCloth.new(code).to_html}</div>\n"
       else Pygments.highlight(code, options) rescue "<div class=\"highlight\"><pre>#{code}</pre></div>\n"
     end

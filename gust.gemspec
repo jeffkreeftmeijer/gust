@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency 'rspec', ['~> 2.0']
-  s.add_dependency 'pygments.rb', ['~> 0.1.2']
-  s.add_dependency 'kramdown', ['~> 0.13.3']
-  s.add_dependency 'RedCloth', ['~> 4.2.7']
+  s.add_dependency 'pygments.rb', ['~> 0.1']
+  s.add_dependency 'redcarpet', ['~> 1.17']
+  s.add_dependency 'RedCloth', ['~> 4.2']
 end
