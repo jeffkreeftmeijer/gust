@@ -15,7 +15,7 @@ describe Gust do
 
       subject { Gust.parse('foo') }
 
-      it { should == "<div class=\"highlight\"><pre>foo</pre></div>\n" }
+      it { should == "<div class=\"highlight plain\"><pre>foo</pre></div>\n" }
 
     end
 
@@ -23,7 +23,7 @@ describe Gust do
 
       subject { Gust.parse('foo', :filename => 'foo.bar') }
 
-      it { should == "<div class=\"highlight\"><pre>foo</pre></div>\n" }
+      it { should == "<div class=\"highlight plain\"><pre>foo</pre></div>\n" }
 
     end
 
