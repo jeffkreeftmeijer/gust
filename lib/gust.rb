@@ -1,18 +1,54 @@
 require 'pygments'
-require 'kramdown'
+require 'redcarpet'
 require 'RedCloth'
+require 'nokogiri'
 
 class Gust
+  extend Pygments
 
-  def self.parse(code, options = {})
-    return "<div class=\"highlight\"><pre>#{code}</pre></div>\n" unless options[:filename]
+  class << self
 
-    case options[:filename]
-      when /.*\.png$/ then "<div class=\"image\"><img src=\"#{options[:url]}\"/></div>\n"
-      when /.*\.markdown$/, /.*\.md$/ then "<div class=\"markup\">#{Kramdown::Document.new(code).to_html}</div>\n"
-      when /.*\.textile$/ then "<div class=\"markup\">#{RedCloth.new(code).to_html}</div>\n"
-      else Pygments.highlight(code, options) rescue "<div class=\"markup\">#{code}</div>\n"
+    def parse(code, options = {})
+      return plain_text(code) unless options[:filename]
+
+      case options[:filename]
+        when /.*\.png$/ then image(options[:url])
+        when /.*\.markdown$/, /.*\.md$/ then markdown(code)
+        when /.*\.textile$/ then textile(code)
+        else highlight(code, options) rescue plain_text(code)
+      end
+
     end
+
+    protected
+
+      def image(src)
+        "<div class=\"image\"><img src=\"#{src}\"/></div>\n"
+      end
+
+      def markdown(markup)
+        inline_highlight(
+          "<div class=\"markup\">" <<
+          Redcarpet.new(markup, :fenced_code, :gh_blockcode).to_html <<
+          "</div>"
+        ) << "\n"
+      end
+
+      def textile(markup)
+        "<div class=\"markup\">#{RedCloth.new(markup).to_html}</div>\n"
+      end
+
+      def plain_text(text)
+        "<div class=\"highlight\"><pre>#{text}</pre></div>\n"
+      end
+
+      def inline_highlight(html)
+        doc = Nokogiri::HTML(html)
+        doc.search("//pre[@lang]").each do |pre|
+          pre.replace highlight(pre.text.rstrip, :lexer => pre[:lang])
+        end
+        doc.xpath('//div[@class="markup"]').to_xml
+      end
 
   end
 
